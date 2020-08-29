@@ -1,0 +1,63 @@
+﻿@using FlywayAirlines
+@model Flight
+
+<caption>Update Flight</caption>
+<hr />
+
+<div class="row">
+    <div class="col-md-5">
+
+        <form method="POST">
+            <input type="hidden" name="id" value="@Model.getId()" />
+
+            <div class="form-group">
+                <label class="control-label">Flight Number</label>
+                <input class="form-control" name="flightNumber" value="@Model.getFlightNumber()" type="number" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Aicraft ID</label>
+                <input class="form-control" name="aircraftid" value="@Model.getAircraftid()" type="number" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">From</label>
+                <input class="form-control" name="takeOfPoint" value="@Model.getTakeOfPoint()" type="text" />
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="control-label">Destination</label>
+                <input class="form-control" name="destination" value="@Model.getDestination()" type="text" />
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Flight Time</label>
+                <input class="form-control" name="takeOfTime" value="@Model.getTakeOfTime()" type="datetime-local" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Flight Duration</label>
+                <input class="form-control" name="flightDuration" value="@Model.getFlightDuration()" type="number" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Flight Price</label>
+                <input class="form-control" name="flightPrice" value="@Model.getFlightPrice()" type="number" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<p><a asp-area="" asp-controller="Flight" asp-action="Display">Back to Flight List</a></p>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

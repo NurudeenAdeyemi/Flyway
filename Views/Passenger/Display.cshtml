@@ -1,0 +1,56 @@
+﻿@using FlywayAirlines
+@model List<Passenger>
+
+<caption>List of Passengers</caption>
+
+
+
+<hr />
+
+<table class="table  table-bordered table-striped table table-dark table-hover">
+
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Date of Birth</th>
+            <th>Booking Id</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Passenger passenger in Model)
+        {
+        <tr>
+            <td> @passenger.getId() </td>
+            <td> @passenger.getFirstName() </td>
+            <td> @passenger.getLastName() </td>
+            <td> @passenger.getGender() </td>
+            <td> @passenger.getAddress() </td>
+            <td> @passenger.getEmail() </td>
+            <td> @passenger.getPhoneNumber() </td>
+            <td> @passenger.getDateOfBirth().ToLongDateString() </td>
+            <td> @passenger.getBookingid() </td>
+            <td> <a href="/passenger/Details/@passenger.getId()">Details</a> </td>
+            <td> <a href="/passenger/Edit/@passenger.getId()">Edit</a> </td>
+            <td> <a href="/passenger/Delete/@passenger.getId()">Delete</a> </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<p><a asp-area="" asp-controller="Passenger" asp-action="Create">Add new Passenger</a></p>
+<div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+</div>
+
+
+
+

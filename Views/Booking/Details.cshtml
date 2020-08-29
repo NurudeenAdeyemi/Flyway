@@ -1,0 +1,20 @@
+﻿@using FlywayAirlines
+@model Booking
+
+
+<caption>Booking details</caption>
+<hr />
+<div>
+    <ul class="list-group">
+
+        <li class="list-group-item "><b>Booking Number</b> : @Model.getBookingNumber()</li>
+        <li class="list-group-item "><b>Booking Date</b> : @Model.getBookingDate()</li>
+        <li class="list-group-item "><b>Booking Type</b> : @Model.getBookingType()</li>
+        <li class="list-group-item "><b>Seat Number</b> : @Model.getSeatNumber()</li>
+        <li class="list-group-item "><b>Flight ID</b> : @Model.getFlightid()</li>
+    </ul>
+
+</div>
+
+<a asp-area="" asp-controller="Booking" asp-action="Display">Back to Booking List</a>
+

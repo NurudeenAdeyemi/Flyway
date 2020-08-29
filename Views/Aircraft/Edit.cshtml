@@ -1,0 +1,55 @@
+﻿@using FlywayAirlines
+@model Aircraft
+
+    <caption>Update Aircraft</caption>
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            
+
+            <form method="POST">
+                <input type="hidden" name="id" value="@Model.getId()" />
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Name</label>
+                        <input class="form-control" name="name" value="@Model.getName()" type="text" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Type</label>
+                        <input class="form-control" name="type" value="@Model.getType()" type="text" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Capacity</label>
+                        <input class="form-control" name="Capacity" value="@Model.getCapacity()" type="number" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Registration Number</label>
+                        <input class="form-control" name="registrationNumber" value="@Model.getRegistrationNumber()" type="text" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Manufacturer</label>
+                        <input class="form-control" name="manufacturer" value="@Model.getManufacturer()" type="text" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Cruise Speed (km/hr)</label>
+                        <input class="form-control" name="cruiseSpeed" value="@Model.getCruiseSpeed()" type="number" />
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+                <p><a asp-area="" asp-controller="Aircraft" asp-action="Display">Back to Aircraft List</a></p>

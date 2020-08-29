@@ -1,0 +1,64 @@
+﻿@using FlywayAirlines
+@model Flight
+
+<caption>Add Flight</caption>
+<hr />
+
+
+<div class="row">
+    <div class="col-md-5">
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label class="control-label">Flight Number</label>
+                <input class="form-control" name="flightNumber" type="number" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Aicraft ID</label>
+                <input class="form-control" name="aircraftid" type="number" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">From</label>
+                <input class="form-control" name="takeOfPoint" type="text" />
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="control-label">Destination</label>
+                <input class="form-control" name="destination" type="text" />
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Flight Time</label>
+                <input class="form-control" name="takeOfTime" type="datetime-local" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Flight Duration</label>
+                <input class="form-control" name="flightDuration" type="number" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Flight Price</label>
+                <input class="form-control" name="flightPrice" type="number" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+
+            </div>
+        </form>
+    </div>
+</div>
+<p><a asp-area="" asp-controller="Flight" asp-action="Display">Back to Flight List</a></p>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

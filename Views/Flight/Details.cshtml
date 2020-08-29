@@ -1,0 +1,22 @@
+﻿@using FlywayAirlines
+@model Flight
+
+
+<caption>Flight properties</caption>
+<hr />
+<div>
+    <ul class="list-group">
+        <li class="list-group-item "><b>ID</b> : @Model.getId()</li>
+        <li class="list-group-item "><b>Flight Number</b> : @Model.getFlightNumber()</li>
+        <li class="list-group-item "><b>From</b> : @Model.getTakeOfPoint()</li>
+        <li class="list-group-item "><b>Destination</b> : @Model.getDestination()</li>
+        <li class="list-group-item "><b>Flight Time</b> : @Model.getTakeOfTime()</li>
+        <li class="list-group-item "><b>Flight Duration</b> : @Model.getFlightDuration()</li>
+        <li class="list-group-item "><b>Flight Price</b> : @Model.getFlightPrice()</li>
+        <li class="list-group-item "><b>Aircraft ID</b> : @Model.getAircraftid()</li>
+    </ul>
+
+</div>
+
+<a asp-area="" asp-controller="Flight" asp-action="Display">Back to Flight List</a>
+

@@ -1,0 +1,20 @@
+﻿@using FlywayAirlines
+@model Aircraft
+
+
+    <caption>Aircraft attributes</caption>
+    <hr />
+    <div>
+        <ul class="list-group">
+            
+            <li class="list-group-item "><b>Registration Number</b> : @Model.getRegistrationNumber()</li>
+            <li class="list-group-item "><b>Type</b> : @Model.getType()</li>
+            <li class="list-group-item "><b>Capacity</b> : @Model.getCapacity()</li>
+            <li class="list-group-item "><b>Manufacturer</b> : @Model.getManufacturer()</li>
+            <li class="list-group-item "><b>Cruise Speed (km/hr)</b> : @Model.getCruiseSpeed()</li>
+        </ul>
+        
+    </div>
+
+    <a asp-area="" asp-controller="Aircraft" asp-action="Display">Back to Aircraft List</a>
+

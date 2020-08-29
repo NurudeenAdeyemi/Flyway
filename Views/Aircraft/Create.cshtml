@@ -1,0 +1,58 @@
+﻿@using FlywayAirlines
+@model Aircraft
+
+    <caption>Add Aircraft</caption>
+    <hr />
+
+
+<div class="row">
+    <div class="col-md-5">
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label class="control-label">Name</label>
+                <input class="form-control" name="name" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Type</label>
+                <input class="form-control" name="type" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Capacity</label>
+                <input class="form-control" name="capacity" type="number" />
+            </div>
+
+           
+
+            <div class="form-group">
+                <label class="control-label">Registration Number</label>
+                <input class="form-control" name="registrationNumber" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Manufacturer</label>
+                <input class="form-control" name="manufacturer" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Cruise speed (km/hr)</label>
+                <input class="form-control" name="cruiseSpeed" type="number" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+
+            </div>
+        </form>
+                </div>
+            </div>
+<a asp-area="" asp-controller="Aircraft" asp-action="Display">Back to Aircraft List</a>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,49 @@
+﻿@using FlywayAirlines
+@model Booking
+
+<caption>Add Booking</caption>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+
+
+        <form method="POST">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Booking Number</label>
+                    <input class="form-control" name="bookingNumber" type="number" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">Booking Date</label>
+                    <input class="form-control" name="bookingDate" type="date" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Booking Type</label>
+                    <input class="form-control" name="bookingType" type="text" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">Seat Number</label>
+                    <input class="form-control" name="seatNumber" type="number" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Flight Id</label>
+                    <input class="form-control" name="flightid" type="number" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<p><a asp-area="" asp-controller="Booking" asp-action="Display">Back to Booking List</a></p>
