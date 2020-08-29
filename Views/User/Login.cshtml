@@ -1,0 +1,27 @@
+﻿
+<caption>Login</caption>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form method="POST">
+         @if (!string.IsNullOrEmpty(ViewBag.Message))
+         {
+             <p class="alert alert-warning alert-dismissible" role="alert">@ViewBag.Message</p>
+         }
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Email/Username</label>
+                    <input class="form-control" name="email" type="email"/>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">Password</label>
+                    <input class="form-control" name="password" type="password"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>

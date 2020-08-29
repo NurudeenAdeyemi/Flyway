@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using FlywayAirlines.Models;
 using FlywayAirlines.Repositories;
 using FlywayAirlines.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
 namespace FlywayAirlines.Controllers
 {
+    [Authorize]
     public class AircraftController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
+        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IAircraftRepository aircraftRepo = new AircraftRepository(conn);
         static IAircraftService aircraftService = new AircraftService(aircraftRepo);
@@ -82,11 +84,11 @@ namespace FlywayAirlines.Controllers
             {
                 return NotFound();
             }
-            return View();
+            return View(aircraft);
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, string name, string type, string registrationNumber, int firstClassCapacity, int secondClassCapacity, int thirdClassCapacity, string manufacturer, int cruiseSpeed)
+        public IActionResult Delete(int id, int x)
         {
                 aircraftService.remove(id);
                 return RedirectToAction("Display");

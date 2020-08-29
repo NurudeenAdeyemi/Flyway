@@ -1,0 +1,44 @@
+﻿@using FlywayAirlines
+@model User
+
+<caption>Edit User</caption>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+
+
+        <form method="POST">
+            <input type="hidden" name="id" value="@Model.getId()" />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Firstname</label>
+                    <input class="form-control" name="firstName" value="@Model.getFirstName()" type="text" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">Lastname</label>
+                    <input class="form-control" name="lastName" value="@Model.getLastName()" type="text" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Email</label>
+                    <input class="form-control" name="email" value="@Model.getEmail()" type="email" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">Password</label>
+                    <input class="form-control" name="password"  type="password" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p><a asp-area="" asp-controller="User" asp-action="Display">Back to User List</a></p>

@@ -1,0 +1,17 @@
+﻿@using FlywayAirlines
+@model User
+
+
+<caption>User details</caption>
+<hr />
+<div>
+    <ul class="list-group">
+
+        <li class="list-group-item "><b>Firtsname</b> : @Model.getFirstName()</li>
+        <li class="list-group-item "><b>Lastname</b> : @Model.getLastName()</li>
+        <li class="list-group-item "><b>Email</b> : @Model.getEmail()</li>
+    </ul>
+
+</div>
+
+<a asp-area="" asp-controller="User" asp-action="Display">Back to User List</a>

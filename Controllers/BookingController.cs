@@ -4,14 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using FlywayAirlines.Repositories;
 using FlywayAirlines.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
 namespace FlywayAirlines.Controllers
 {
+    [Authorize]
     public class BookingController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
+        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IBookingRepository bookingRepo = new BookingRepository(conn);
         static IBookingService bookingService = new BookingService(bookingRepo);
