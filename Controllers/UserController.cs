@@ -14,9 +14,10 @@ using MySql.Data.MySqlClient;
 namespace FlywayAirlines.Controllers
 {
     [Authorize]
+
     public class UserController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
+        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IUserRepository userRepository = new UserRepository(conn);
         static IUserService userService = new UserService(userRepository);
@@ -27,6 +28,7 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
+
         public IActionResult create(string firstName, string lastName, string email, string password)
         {
             userService.create(firstName, lastName, email, password);
@@ -133,9 +135,16 @@ namespace FlywayAirlines.Controllers
                 var authenticationProperties = new AuthenticationProperties();
                 var principal = new ClaimsPrincipal(claimsIdentity);
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authenticationProperties);
-                return RedirectToAction("Display", "Aircraft");
+                return RedirectToAction("Admin", "User");
             }
 
+        }
+
+        [HttpGet]
+        public IActionResult Admin()
+        {
+
+            return View();
         }
     }
 }

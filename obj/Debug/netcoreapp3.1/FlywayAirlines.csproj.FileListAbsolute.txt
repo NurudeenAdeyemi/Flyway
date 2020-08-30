@@ -146,3 +146,10 @@ C:\Projects\Nurudeen\Flyway\obj\Debug\netcoreapp3.1\Razor\Views\User\Details.csh
 C:\Projects\Nurudeen\Flyway\obj\Debug\netcoreapp3.1\Razor\Views\User\Display.cshtml.g.cs
 C:\Projects\Nurudeen\Flyway\obj\Debug\netcoreapp3.1\Razor\Views\User\Edit.cshtml.g.cs
 C:\Projects\Nurudeen\Flyway\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Create.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Delete.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Details.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Display.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Edit.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
+C:\Users\nurudeen\source\repos\FlywayAirlines\obj\Debug\netcoreapp3.1\Razor\Views\User\Admin.cshtml.g.cs
