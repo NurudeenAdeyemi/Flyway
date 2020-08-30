@@ -12,8 +12,6 @@ namespace FlywayAirlines
 {
     public class Program
     {
-        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
-        static MySqlConnection conn = new MySqlConnection(connStr);
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

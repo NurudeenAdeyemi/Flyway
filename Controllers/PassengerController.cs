@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using FlywayAirlines.Repositories;
 using FlywayAirlines.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
 namespace FlywayAirlines.Controllers
 {
+    [Authorize]
     public class PassengerController : Controller
     {
         static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
