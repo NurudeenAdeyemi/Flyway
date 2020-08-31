@@ -20,5 +20,7 @@ namespace FlywayAirlines.Repositories
         public Flight findById(int id);
 
         public void displayAll();
+
+        public List<Flight> search(string source, string destination, DateTime departureDate);
     }
 }

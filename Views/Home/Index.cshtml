@@ -1,8 +1,87 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model List<Flight>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Flyway Airlines</h1>
+    
 </div>
+
+
+
+
+
+<div class="row">
+    <div class="col-md-5">
+
+
+        <form method="POST" asp-action="FlightSearch" asp-controller="Home">
+            
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">FROM</label>
+                    <input class="form-control" name="source"  type="text" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">TO</label>
+                    <input class="form-control" name="destination"  type="text" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">Departure</label>
+                    <input class="form-control" name="departureDate" type="date" />
+                </div>
+            </div>
+            
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-primary">Flight search</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <caption>List of Available Flights</caption>
+
+
+
+    <hr />
+
+    <table class="table  table-bordered table-striped table table-dark table-hover">
+
+        <thead>
+        <tr>
+            <th>Flight Number</th>
+            <th>From</th>
+            <th>Destination</th>
+            <th>Flight Time</th>
+            <th>Flight Duration</th>
+            <th>Flight Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Flight flight in Model)
+        {
+            <tr>
+                <td> @flight.getFlightNumber() </td>
+                <td> @flight.getTakeOfPoint() </td>
+                <td> @flight.getDestination() </td>
+                <td> @flight.getTakeOfTime() </td>
+                <td> @flight.getFlightDuration() </td>
+                <td> @flight.getFlightPrice() </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+
+

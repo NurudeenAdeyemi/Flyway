@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using FlywayAirlines.Repositories;
 using FlywayAirlines.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MySql.Data.MySqlClient;
 
 namespace FlywayAirlines.Controllers
@@ -17,9 +19,20 @@ namespace FlywayAirlines.Controllers
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IFlightRepository flightRepo = new FlightRepository(conn);
         static IFlightService flightService = new FlightService(flightRepo);
+        static IAircraftRepository aircraftRepository = new AircraftRepository(conn);
+        static IAircraftService aircraftService = new AircraftService(aircraftRepository);
         [HttpGet]
         public IActionResult create()
         {
+            List<Aircraft> aircrafts = aircraftService.getAll();
+            List<SelectListItem> listAItems = new List<SelectListItem>();
+            foreach (Aircraft aircraft in aircrafts)
+            {
+                SelectListItem item = new SelectListItem(aircraft.getRegistrationNumber(), aircraft.getId().ToString());
+                listAItems.Add(item);
+            }
+
+            ViewBag.Aircrafts = listAItems;
             return View();
         }
 
@@ -92,5 +105,6 @@ namespace FlywayAirlines.Controllers
             flightService.remove(id);
             return RedirectToAction("Display");
         }
+
     }
 }

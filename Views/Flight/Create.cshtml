@@ -17,7 +17,13 @@
 
             <div class="form-group">
                 <label class="control-label">Aicraft ID</label>
-                <input class="form-control" name="aircraftid" type="number" />
+                @*<select class="form-control" name="aircraftid">
+                   @foreach (Aircraft aircraft in ViewBag.Aircrafts)
+                   {
+                       <option value="@aircraft.getId()">@aircraft.getRegistrationNumber()</option>
+                   }
+                </select>*@
+                <select class="form-control" name="aircraftid" asp-items="@ViewBag.Aircrafts"></select>
             </div>
 
             <div class="form-group">

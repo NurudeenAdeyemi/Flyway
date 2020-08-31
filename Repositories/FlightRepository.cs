@@ -217,5 +217,48 @@ namespace FlywayAirlines.Repositories
             connection.Close();
             return flight;
         }
+
+        public List<Flight> search(string source, string destination, DateTime departureDate)
+        {
+            List<Flight> flights = new List<Flight>();
+            try
+            {
+
+                connection.Open();
+                string sql = $"SELECT id, flightNumber, aircraftid,takeOfPoint,flightDuration,takeOfTime,destination,flightPrice FROM flights WHERE takeOfPoint = '{source}' and destination = '{destination}' and date(takeOfTime) = date('{departureDate:yyyy-MM-dd}')";
+
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    {
+
+                        int id = reader.GetInt32(0);
+                        int flightNumber = reader.GetInt32(1);
+                        int aircraftid = reader.GetInt32(2);
+                        string takeOfPoint = reader.GetString(3);
+                        Decimal flightDuration = reader.GetDecimal(4);
+                        DateTime takeOfTime = reader.GetDateTime(5);
+                        decimal flightPrice = reader.GetDecimal(7);
+                        Flight flight = new Flight(id, flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+                        flights.Add(flight);
+
+                    }
+                    Console.WriteLine(reader[0] + " -- " + reader[1]);
+                }
+                reader.Close();
+
+                connection.Close();
+                Console.WriteLine("Done.");
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return flights;
+        }
     }
 }
