@@ -22,7 +22,7 @@ namespace FlywayAirlines.Repositories
             {
 
                 connection.Open();
-                string sql = "SELECT id,bookingNumber,flightid, bookingDate, bookingType, seatNumber from bookings";
+                string sql = "SELECT id,bookingNumber,flightid, passengerid, bookingDate, bookingType, seatNumber from bookings";
 
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -33,12 +33,13 @@ namespace FlywayAirlines.Repositories
                     {
 
                         int id = reader.GetInt32(0);
-                        int bookingNumber = reader.GetInt32(1);
+                        string bookingNumber = reader.GetString(1);
                         int flightid = reader.GetInt32(2);
-                        DateTime bookingDate = reader.GetDateTime(3);
-                        string bookingType = reader.GetString(4);
-                        int seatNumber = reader.GetInt32(5);
-                        Booking booking = new Booking(id, bookingNumber, flightid, bookingDate, bookingType, seatNumber);
+                        int passengerid = reader.GetInt32(3);
+                        DateTime bookingDate = reader.GetDateTime(4);
+                        string bookingType = reader.GetString(5);
+                        int seatNumber = reader.GetInt32(6);
+                        Booking booking = new Booking(id, bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
                         bookings.Add(booking);
 
                     }
@@ -57,7 +58,7 @@ namespace FlywayAirlines.Repositories
             return bookings;
         }
 
-        public bool create(int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        public bool create(string bookingNumber, int flightid, int passengerid, DateTime bookingDate, string bookingType, int seatNumber)
         {
             Flight flight = flightManager.findById(flightid);
             if (flight == null)
@@ -68,7 +69,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                string sql = "insert into bookings (bookingNumber,flightid,bookingDate, bookingType, seatNumber)values ('" + bookingNumber + "','" + flightid + "','" + bookingDate.ToString("yyyy-MM-dd") + "','" + bookingType + "', '" + seatNumber + "')";
+                string sql = "insert into bookings (bookingNumber,flightid, passengerid, bookingDate, bookingType, seatNumber)values ('" + bookingNumber + "','" + flightid + "', '" + passengerid + "','" + bookingDate.ToString("yyyy-MM-dd") + "','" + bookingType + "', '" + seatNumber + "')";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
@@ -85,7 +86,7 @@ namespace FlywayAirlines.Repositories
             return false;
         }
 
-        public bool update(int id, int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        public bool update(int id, string bookingNumber, int flightid, int passengerid, DateTime bookingDate, string bookingType, int seatNumber)
         {
             Flight flight = flightManager.findById(flightid);
             if (flight == null)
@@ -96,7 +97,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                var sql = "update bookings set flightid ='" + flightid + "',bookingNumber='" + bookingNumber + "', bookingDate ='" + bookingDate.ToString("yyyy-MM-dd") + "', bookingType='" + bookingType + "', seatNumber='" + seatNumber + "' where id='" + id + "'";
+                var sql = "update bookings set flightid ='" + flightid + "', passengerid ='" + passengerid + "', bookingNumber='" + bookingNumber + "', bookingDate ='" + bookingDate.ToString("yyyy-MM-dd") + "', bookingType='" + bookingType + "', seatNumber='" + seatNumber + "' where id='" + id + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
@@ -138,13 +139,13 @@ namespace FlywayAirlines.Repositories
             return false;
         }
 
-        public Booking find(int bookingNumber)
+        public Booking find(string bookingNumber)
         {
             Booking booking = null;
             try
             {
                 connection.Open();
-                var sql = "select id, bookingNumber,flightid, bookingDate, bookingType, seatNumber from bookings where bookingNumber = '" + bookingNumber + "'";
+                var sql = "select id, bookingNumber,flightid, passengerid, bookingDate, bookingType, seatNumber from bookings where bookingNumber = '" + bookingNumber + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -153,10 +154,11 @@ namespace FlywayAirlines.Repositories
                 {
                     int id = reader.GetInt32(0);
                     int flightid = reader.GetInt32(2);
-                    DateTime bookingDate = reader.GetDateTime(3);
-                    string bookingType = reader.GetString(4);
-                    int seatNumber = reader.GetInt32(5);
-                    booking = new Booking(id, bookingNumber, flightid, bookingDate, bookingType, seatNumber);
+                    int passengerid = reader.GetInt32(3);
+                    DateTime bookingDate = reader.GetDateTime(4);
+                    string bookingType = reader.GetString(5);
+                    int seatNumber = reader.GetInt32(6);
+                    booking = new Booking(id, bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
                 }
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
                 //Console.WriteLine($"{booking.getId()}, {booking.getBookingNumber()}, {booking.getFlightNumber()}, {booking.getBookingDate()}, {booking.getBookingType()}, {booking.getSeatNumber()}");
@@ -174,7 +176,7 @@ namespace FlywayAirlines.Repositories
             List<Booking> bookings = getAll();
             foreach (Booking booking in bookings)
             {
-                Console.WriteLine($"{booking.getId()}, {booking.getBookingNumber()}, {booking.getFlightid()}, {booking.getBookingDate().ToString("yyyy-MM-dd")}, {booking.getBookingType()}, {booking.getSeatNumber()}");
+                Console.WriteLine($"{booking.getId()}, {booking.getBookingNumber()}, {booking.getFlightid()}, {booking.getPassengerid()}, {booking.getBookingDate().ToString("yyyy-MM-dd")}, {booking.getBookingType()}, {booking.getSeatNumber()}");
             }
         }
 
@@ -184,7 +186,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                var sql = "select id, bookingNumber,flightid, bookingDate, bookingType, seatNumber from bookings where id = '" + id + "'";
+                var sql = "select id, bookingNumber,flightid, passengerid, bookingDate, bookingType, seatNumber from bookings where id = '" + id + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -192,12 +194,13 @@ namespace FlywayAirlines.Repositories
                 if (reader.Read())
                 {
                     //int id = reader.GetInt32(0);
-                    int bookingNumber = reader.GetInt32(1);
+                    string bookingNumber = reader.GetString(1);
                     int flightid = reader.GetInt32(2);
-                    DateTime bookingDate = reader.GetDateTime(3);
-                    string bookingType = reader.GetString(4);
-                    int seatNumber = reader.GetInt32(5);
-                    booking = new Booking(id, bookingNumber, flightid, bookingDate, bookingType, seatNumber);
+                    int passengerid = reader.GetInt32(3);
+                    DateTime bookingDate = reader.GetDateTime(4);
+                    string bookingType = reader.GetString(5);
+                    int seatNumber = reader.GetInt32(6);
+                    booking = new Booking(id, bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
                 }
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
                 //Console.WriteLine($"{booking.getId()}, {booking.getBookingNumber()}, {booking.getFlightNumber()}, {booking.getBookingDate()}, {booking.getBookingType()}, {booking.getSeatNumber()}");

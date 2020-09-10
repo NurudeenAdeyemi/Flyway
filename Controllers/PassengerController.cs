@@ -13,22 +13,24 @@ namespace FlywayAirlines.Controllers
     [Authorize]
     public class PassengerController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
+        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IPassengerRepository passengerRepo = new PassengerRepository(conn);
         static IPassengerService passengerService = new PassengerService(passengerRepo);
         
         [HttpGet]
+       
         public IActionResult create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult create(string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        
+        public IActionResult create(string firstName, string lastName,  double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            passengerService.create(firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
-            return RedirectToAction("Display");
+            passengerService.create(firstName, lastName, phoneNumber, email, gender, dateOfBirth);
+            return RedirectToAction("Create", "Booking");
 
         }
         [HttpGet]
@@ -68,9 +70,9 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public IActionResult Edit(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            passengerService.update(id, firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
+            passengerService.update(id, firstName, lastName,  phoneNumber, email, gender, dateOfBirth);
             return RedirectToAction("Display");
         }
 
@@ -88,7 +90,7 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public IActionResult Delete(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             passengerService.remove(id);
             return RedirectToAction("Display");

@@ -14,16 +14,18 @@ namespace FlywayAirlines.Services
         {
             this.bookingRepository = bookingRepository;
         }
-        public bool create(int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        public bool create(int flightid, int passengerid, string bookingType, int seatNumber)
         {
             if (flightid <= 0)
             {
                 return false;
             }
-            return bookingRepository.create(bookingNumber, flightid, bookingDate, bookingType, seatNumber);
+            var bookingNumber = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10);
+            var bookingDate = DateTime.Now;
+            return bookingRepository.create(bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
         }
 
-        public Booking find(int bookingNumber)
+        public Booking find(string bookingNumber)
         {
             return bookingRepository.find(bookingNumber);
         }
@@ -43,9 +45,11 @@ namespace FlywayAirlines.Services
             return bookingRepository.remove(id);
         }
 
-        public bool update(int id, int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        public bool update(int id,  int flightid, int passengerid, string bookingType, int seatNumber)
         {
-            return bookingRepository.update(id, bookingNumber, flightid, bookingDate, bookingType, seatNumber);
+            var bookingNumber = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10);
+            var bookingDate = DateTime.Now;
+            return bookingRepository.update(id, bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
         }
     }
 }

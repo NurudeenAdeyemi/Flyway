@@ -1,66 +1,70 @@
 ﻿@using FlywayAirlines
-@model Passenger
+@model Passenger 
 
-<caption>Add Passenger</caption>
+
+<caption class="text-center text-primary">Passenger Information</caption>
 <hr />
-<div class="row">
-    <div class="col-md-5">
+<div class="container-fluid bg-3 text-left">
+    
+    <div class="row">
+        <div class="col-sm-9 bg-light border border-secondary ">
 
+            <form method="POST">
 
-        <form method="POST">
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Firstname</label>
+                        <input class="form-control" name="firstName" type="text" />
+                    </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Firstname</label>
-                    <input class="form-control" name="firstName" type="text" />
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Lastname</label>
+                        <input class="form-control" name="lastName" type="text" />
+                    </div>
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label class="control-label">Lastname</label>
-                    <input class="form-control" name="lastName" type="text" />
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Gender</label>
+                        <input class="form-control" name="gender" type="text" />
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" name="email" type="email" />
+                    </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Phone Number</label>
+                        <input class="form-control" name="phoneNumber" type="number" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Date of Birth</label>
+                        <input class="form-control" name="dateOfBirth" type="date" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <input type="submit" value="Continue" class="btn btn-primary search-button btn transition-effect alert-primary" />
+                </div>
+            </form>
+        </div> <br>
+       
+        <div class="col-sm-3 bg-light">
+            <div class="text-white bg-dark"><h6>Your Trip Summary</h6></div>
+            <div class="text-left text-dark mb-0">
+                <p><h5><i class="fa fa-fw fa-plane"></i>Departure</h5><p></p>
+                <h6>Departing ...</h6>
+                
             </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Gender</label>
-                    <input class="form-control" name="gender" type="text" />
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label class="control-label">Address</label>
-                    <input class="form-control" name="address" type="text" />
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Email</label>
-                    <input class="form-control" name="email" type="email" />
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label class="control-label">Phone Number</label>
-                    <input class="form-control" name="phoneNumber" type="number" />
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Date of Birth</label>
-                    <input class="form-control" name="dateOfBirth" type="date" />
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label class="control-label">Booking Id</label>
-                    <input class="form-control" name="bookingid" type="number" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Add" class="btn btn-primary" />
-            </div>
-        </form>
+           
+        </div>
     </div>
+    <hr>
 </div>
-<p><a asp-area="" asp-controller="Passenger" asp-action="Display">Back to Passenger List</a></p>
+
+
+
+@*<p><a asp-area="" asp-controller="Booking" asp-action="Display">Back to Passenger List</a></p>*@

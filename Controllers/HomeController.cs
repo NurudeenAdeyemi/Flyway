@@ -9,16 +9,20 @@ using FlywayAirlines.Models;
 using FlywayAirlines.Repositories;
 using FlywayAirlines.Services;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FlywayAirlines.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
+        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IFlightRepository flightRepo = new FlightRepository(conn);
         static IFlightService flightService = new FlightService(flightRepo);
+        static IPassengerRepository passengerRepo = new PassengerRepository(conn);
+        static IPassengerService passengerService = new PassengerService(passengerRepo);
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -41,12 +45,27 @@ namespace FlywayAirlines.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+
+     
+
         [HttpPost]
 
         public IActionResult FlightSearch(string source, string destination, DateTime departureDate )
         {
             List<Flight> flights = flightService.search(source, destination, departureDate);
-            return View("Index", flights);
+            return View("Availableflights", flights);
         }
+
+        [HttpPost]
+
+        public IActionResult AddPassenger(string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        {
+            passengerService.create(firstName, lastName, phoneNumber, email, gender, dateOfBirth);
+            return RedirectToAction("Create", "Booking");
+
+        }
+        
+
+
     }
 }

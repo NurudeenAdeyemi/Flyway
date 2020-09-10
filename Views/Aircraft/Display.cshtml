@@ -1,14 +1,14 @@
 ﻿@using FlywayAirlines
 @model List<Aircraft>
 
-    <caption>List of Aircrafts</caption>
-    
+<caption>List of Aircrafts</caption>
 
 
-    <hr />
 
-    <table class="table  table-bordered table-striped table table-dark table-hover">
-       
+<hr />
+
+    <table class="table  table-bordered table-striped table table-dark table-hover table-responsive">
+
         <thead>
             <tr>
                 <th>Id</th>
@@ -21,34 +21,40 @@
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Create Flight</th>
 
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @foreach (Aircraft aircraft in Model)
             {
-            <tr>
-                <td> @aircraft.getId() </td>
-                <td> @aircraft.getName() </td>
-                <td> @aircraft.getRegistrationNumber() </td>
-                <td> @aircraft.getType() </td>
-                <td> @aircraft.getCapacity() </td>
-                <td> @aircraft.getManufacturer() </td>
-                <td> @aircraft.getCruiseSpeed() </td>
-                <td> <a href="/aircraft/Details/@aircraft.getId()">Details</a> </td>
-                <td> <a href="/aircraft/Edit/@aircraft.getId()">Edit</a> </td>
-                <td> <a href="/aircraft/Delete/@aircraft.getId()">Delete</a> </td>
-            </tr>
+                <tr>
+                    <td> @aircraft.getId() </td>
+                    <td> @aircraft.getName() </td>
+                    <td> @aircraft.getRegistrationNumber() </td>
+                    <td> @aircraft.getType() </td>
+                    <td> @aircraft.getCapacity() </td>
+                    <td> @aircraft.getManufacturer() </td>
+                    <td> @aircraft.getCruiseSpeed() </td>
+                    <td> <a href="/aircraft/Details/@aircraft.getId()">Details</a> </td>
+                    <td> <a href="/aircraft/Edit/@aircraft.getId()">Edit</a> </td>
+                    <td> <a href="/aircraft/Delete/@aircraft.getId()">Delete</a> </td>
+                    <td> <a asp-area="" asp-controller="Flight" asp-action="Create">Add Flight</a></td>
+                </tr>
             }
         </tbody>
     </table>
+
+
     <p><a asp-area="" asp-controller="Aircraft" asp-action="Create">Add new Aircraft</a></p>
 
     <p><a asp-area="" asp-controller="User" asp-action="Admin">Back to Admin Dashboard</a></p>
     <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
     </div>
-    
+    <br>
+    <br>
+
 
 
 

@@ -17,6 +17,7 @@
             <th>Booking Type</th>
             <th>Seat Number</th>
             <th>Flight ID</th>
+            <th>Passenger ID</th>
             <th>View</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -26,17 +27,18 @@
     <tbody>
         @foreach (Booking booking in Model)
         {
-            <tr>
-                <td> @booking.getId() </td>
-                <td> @booking.getBookingNumber() </td>
-                <td> @booking.getBookingDate().ToLongDateString() </td>
-                <td> @booking.getBookingType() </td>
-                <td> @booking.getSeatNumber() </td>
-                <td> @booking.getFlightid() </td>
-                <td> <a href="/booking/Details/@booking.getId()">Details</a> </td>
-                <td> <a href="/booking/Edit/@booking.getId()">Edit</a> </td>
-                <td> <a href="/booking/Delete/@booking.getId()">Delete</a> </td>
-            </tr>
+        <tr>
+            <td> @booking.getId() </td>
+            <td> @booking.getBookingNumber() </td>
+            <td> @booking.getBookingDate().ToLongDateString() </td>
+            <td> @booking.getBookingType() </td>
+            <td> @booking.getSeatNumber() </td>
+            <td> @booking.getFlightid() </td>
+            <td> @booking.getPassengerid() </td>
+            <td> <a href="/booking/Details/@booking.getId()">Details</a> </td>
+            <td> <a href="/booking/Edit/@booking.getId()">Edit</a> </td>
+            <td> <a href="/booking/Delete/@booking.getId()">Delete</a> </td>
+        </tr>
         }
     </tbody>
 </table>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Nurudeen\\Flyway\\FlywayAirlines.csproj": {}
+    "C:\\Users\\nurudeen\\source\\repos\\FlywayAirlines\\FlywayAirlines.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Nurudeen\\Flyway\\FlywayAirlines.csproj": {
+    "C:\\Users\\nurudeen\\source\\repos\\FlywayAirlines\\FlywayAirlines.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Nurudeen\\Flyway\\FlywayAirlines.csproj",
+        "projectUniqueName": "C:\\Users\\nurudeen\\source\\repos\\FlywayAirlines\\FlywayAirlines.csproj",
         "projectName": "FlywayAirlines",
-        "projectPath": "C:\\Projects\\Nurudeen\\Flyway\\FlywayAirlines.csproj",
-        "packagesPath": "C:\\Users\\madeyemi\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Nurudeen\\Flyway\\obj\\",
+        "projectPath": "C:\\Users\\nurudeen\\source\\repos\\FlywayAirlines\\FlywayAirlines.csproj",
+        "packagesPath": "C:\\Users\\nurudeen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nurudeen\\source\\repos\\FlywayAirlines\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\madeyemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nurudeen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

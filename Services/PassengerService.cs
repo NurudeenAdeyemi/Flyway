@@ -14,18 +14,18 @@ namespace FlywayAirlines.Services
         {
             this.passengerRepository = passengerRepository;
         }
-        public bool create(string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public bool create(string firstName, string lastName,  double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            if (bookingid <= 0)
+            if (lastName == null)
             {
                 return false;
             }
-            return passengerRepository.create(firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
+            return passengerRepository.create(firstName, lastName, phoneNumber, email, gender, dateOfBirth);
         }
 
-        public Passenger find(int bookingid)
+        public Passenger find(string lastName)
         {
-            return passengerRepository.find(bookingid);
+            return passengerRepository.find(lastName);
         }
 
         public Passenger findById(int id)
@@ -43,9 +43,9 @@ namespace FlywayAirlines.Services
             return passengerRepository.remove(id);
         }
 
-        public bool update(int id, string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public bool update(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            return passengerRepository.update(id, firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
+            return passengerRepository.update(id, firstName, lastName, phoneNumber, email, gender, dateOfBirth);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace FlywayAirlines.Controllers
 
     public class UserController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
+        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IUserRepository userRepository = new UserRepository(conn);
         static IUserService userService = new UserService(userRepository);

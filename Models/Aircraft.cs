@@ -15,7 +15,9 @@ namespace FlywayAirlines
         private string name;
         private string manufacturer;
         private int cruiseSpeed;
-        
+        public List<Flight> Flights = new List<Flight>();
+
+
 
         public Aircraft(int id, string name, string type, string registrationNumber, int capacity, string manufacturer, int cruiseSpeed) //constructor is a method used to instantiate the object , has the same name as the class
         {

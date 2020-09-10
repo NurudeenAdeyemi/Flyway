@@ -13,24 +13,27 @@ namespace FlywayAirlines.Controllers
     [Authorize]
     public class BookingController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
+        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IBookingRepository bookingRepo = new BookingRepository(conn);
         static IBookingService bookingService = new BookingService(bookingRepo);
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult create(int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        [AllowAnonymous]
+        public IActionResult create(int flightid, int passengerid, string bookingType, int seatNumber)
         {
-            bookingService.create(bookingNumber, flightid, bookingDate, bookingType, seatNumber);
-            return RedirectToAction("Display");
+            bookingService.create(flightid, passengerid, bookingType, seatNumber);
+            return RedirectToAction("Details","Booking");
 
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Display()
         {
             var bookingList = bookingService.getAll();
@@ -38,7 +41,7 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpGet]
-
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var booking = bookingService.findById(id);
@@ -67,9 +70,9 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        public IActionResult Edit(int id, int flightid, int passengerid, string bookingType, int seatNumber)
         {
-            bookingService.update(id, bookingNumber, flightid, bookingDate, bookingType, seatNumber);
+            bookingService.update(id, flightid, passengerid, bookingType, seatNumber);
             return RedirectToAction("Display");
         }
 
@@ -87,7 +90,7 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public IActionResult Delete(int id, string bookingNumber, int flightid, int passengerid, DateTime bookingDate, string bookingType, int seatNumber)
         {
             bookingService.remove(id);
             return RedirectToAction("Display");

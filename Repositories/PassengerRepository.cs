@@ -22,7 +22,7 @@ namespace FlywayAirlines.Repositories
             {
 
                 connection.Open();
-                string sql = "SELECT id,firstName,lastName,bookingid,address,phoneNumber,email, gender, dateOfBirth from passengers";
+                string sql = "SELECT id,firstName,lastName,phoneNumber,email, gender, dateOfBirth from passengers";
 
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -35,13 +35,12 @@ namespace FlywayAirlines.Repositories
                         int id = reader.GetInt32(0);
                         string firstName = reader.GetString(1);
                         string lastName = reader.GetString(2);
-                        int bookingid = reader.GetInt32(3);
-                        string address = reader.GetString(4);
-                        double phoneNumber = reader.GetDouble(5);
-                        string email = reader.GetString(6);
-                        string gender = reader.GetString(7);
-                        DateTime dateOfBirth = reader.GetDateTime(8);
-                        Passenger passenger = new Passenger(id, firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
+                        
+                        double phoneNumber = reader.GetDouble(3);
+                        string email = reader.GetString(4);
+                        string gender = reader.GetString(5);
+                        DateTime dateOfBirth = reader.GetDateTime(6);
+                        Passenger passenger = new Passenger(id, firstName, lastName, phoneNumber, email, gender, dateOfBirth);
                         passengers.Add(passenger);
 
                     }
@@ -60,18 +59,13 @@ namespace FlywayAirlines.Repositories
             return passengers;
         }
 
-        public bool create(string firstName,  string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public bool create(string firstName,  string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            Booking booking = bookingRepository.findById(bookingid);
-            if (booking == null)
-            {
-                Console.WriteLine($"Booking with {bookingid} could not be found");
-                return false;
-            }
+            
             try
             {
                 connection.Open();
-                string sql = "insert into passengers (firstName,lastName,bookingid,address,phoneNumber,email, gender, dateOfBirth) values ('" + firstName + "', '" + lastName + "','" + bookingid + "','" + address + "','" + phoneNumber + "','" + email + "', '" + gender + "','" + dateOfBirth.ToString("yyyy-MM-dd") + "')";
+                string sql = "insert into passengers (firstName,lastName,phoneNumber,email, gender, dateOfBirth) values ('" + firstName + "', '" + lastName + "','" + phoneNumber + "','" + email + "', '" + gender + "','" + dateOfBirth.ToString("yyyy-MM-dd") + "')";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
@@ -88,18 +82,13 @@ namespace FlywayAirlines.Repositories
             return false;
         }
 
-        public bool update(int id, string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public bool update(int id, string firstName, string lastName,  double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
-            Booking booking = bookingRepository.findById(bookingid);
-            if (booking == null)
-            {
-                Console.WriteLine($"Booking with {bookingid} could not be found");
-                return false;
-            }
+            
             try
             {
                 connection.Open();
-                var sql = "update passengers set firstName='" + firstName + "', lastName='" + lastName + "', bookingid ='" + bookingid + "',address='" + address + "', phoneNumber='" + phoneNumber + "', email='" + email + "', gender='" + gender + "', dateOfBirth='" + dateOfBirth.ToString("yyyy-MM-dd") + "' where id='" + id + "'";
+                var sql = "update passengers set firstName='" + firstName + "', lastName='" + lastName + "', phoneNumber='" + phoneNumber + "', email='" + email + "', gender='" + gender + "', dateOfBirth='" + dateOfBirth.ToString("yyyy-MM-dd") + "' where id='" + id + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
@@ -141,13 +130,13 @@ namespace FlywayAirlines.Repositories
             return false;
         }
 
-        public Passenger find(int bookingid)
+        public Passenger find(string lastName)
         {
             Passenger passenger = null;
             try
             {
                 connection.Open();
-                var sql = "select id, firstName,lastName,bookingid,address,phoneNumber,email, gender, dateOfBirth from passengers where bookingid = '" + bookingid + "'";
+                var sql = "select id, firstName,lastName,phoneNumber,email, gender, dateOfBirth from passengers where lastName = '" + lastName+ "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -156,13 +145,12 @@ namespace FlywayAirlines.Repositories
                 {
                     int id = reader.GetInt32(0);
                     string firstName = reader.GetString(1);
-                    string lastName = reader.GetString(2);
-                    string address = reader.GetString(4);
-                    double phoneNumber = reader.GetDouble(5);
-                    string email = reader.GetString(6);
-                    string gender = reader.GetString(7);
-                    DateTime dateOfBirth = reader.GetDateTime(8);
-                    passenger = new Passenger(id, firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
+                   
+                    double phoneNumber = reader.GetDouble(3);
+                    string email = reader.GetString(4);
+                    string gender = reader.GetString(5);
+                    DateTime dateOfBirth = reader.GetDateTime(6);
+                    passenger = new Passenger(id, firstName, lastName, phoneNumber, email, gender, dateOfBirth);
                 }
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
                 //Console.WriteLine($"{passenger.getId()}, {passenger.getName()}, {passenger.getBookingNumber()}, {passenger.getAddress()}, {passenger.getPhoneNumber()}, {passenger.getEmail()},  {passenger.getGender()}, {passenger.getDateOfBirth()}");
@@ -180,7 +168,7 @@ namespace FlywayAirlines.Repositories
             List<Passenger> passengers = getAll();
             foreach (Passenger passenger in passengers)
             {
-                Console.WriteLine($"{passenger.getId()}, {passenger.getFirstName()}, {passenger.getLastName()},{passenger.getBookingid()}, {passenger.getAddress()}, {passenger.getPhoneNumber()}, {passenger.getEmail()},  {passenger.getGender()}, {passenger.getDateOfBirth()}");
+                Console.WriteLine($"{passenger.getId()}, {passenger.getFirstName()}, {passenger.getLastName()}, {passenger.getPhoneNumber()}, {passenger.getEmail()},  {passenger.getGender()}, {passenger.getDateOfBirth()}");
             }
         }
 
@@ -190,7 +178,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                var sql = "select id, firstName,lastName,bookingid,address,phoneNumber,email, gender, dateOfBirth from passengers where id = '" + id + "'";
+                var sql = "select id, firstName,lastName,phoneNumber,email, gender, dateOfBirth from passengers where id = '" + id + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -198,15 +186,15 @@ namespace FlywayAirlines.Repositories
                 if (reader.Read())
                 {
                     //int id = reader.GetInt32(0);
-                    int bookingid = reader.GetInt32(3);
+                    
                     string firstName = reader.GetString(1);
                     string lastName = reader.GetString(2);
-                    string address = reader.GetString(4);
-                    double phoneNumber = reader.GetDouble(5);
-                    string email = reader.GetString(6);
-                    string gender = reader.GetString(7);
-                    DateTime dateOfBirth = reader.GetDateTime(8);
-                    passenger = new Passenger(id, firstName, lastName, bookingid, address, phoneNumber, email, gender, dateOfBirth);
+                   
+                    double phoneNumber = reader.GetDouble(3);
+                    string email = reader.GetString(4);
+                    string gender = reader.GetString(5);
+                    DateTime dateOfBirth = reader.GetDateTime(6);
+                    passenger = new Passenger(id, firstName, lastName, phoneNumber, email, gender, dateOfBirth);
                 }
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
                 //Console.WriteLine($"{passenger.getId()}, {passenger.getName()}, {passenger.getBookingNumber()}, {passenger.getAddress()}, {passenger.getPhoneNumber()}, {passenger.getEmail()},  {passenger.getGender()}, {passenger.getDateOfBirth()}");

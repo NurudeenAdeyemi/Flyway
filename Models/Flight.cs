@@ -15,6 +15,9 @@ namespace FlywayAirlines
         private DateTime takeOfTime;
         private string destination;
         private decimal flightPrice;
+        public Aircraft Aircraft { get; set; }
+        public List<Booking> Bookings = new List<Booking>();
+
         public Flight(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration , DateTime takeOfTime, string destination, decimal flightPrice)
         {
             this.id = id;
@@ -25,6 +28,7 @@ namespace FlywayAirlines
             this.takeOfTime = takeOfTime;
             this.destination = destination;
             this.flightPrice = flightPrice;
+           
         }
         public void setId(int id)
         {

@@ -8,17 +8,21 @@ namespace FlywayAirlines
     public class Booking
     {
         private int id;
-        private int bookingNumber;
+        private string bookingNumber;
         private int flightid;
         private DateTime bookingDate;
         private string bookingType;
         private int seatNumber;
+        private int passengerid;
+        public Flight flight { get; set; }
+        public Passenger passenger { get; set; }
 
-        public Booking(int id, int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber)
+        public Booking(int id, string bookingNumber, int flightid, int passengerid,  DateTime bookingDate, string bookingType, int seatNumber)
         {
             this.id = id;
             this.bookingNumber = bookingNumber;
             this.flightid = flightid;
+            this.passengerid = passengerid;
             this.bookingDate = bookingDate;
             this.bookingType = bookingType;
             this.seatNumber = seatNumber;
@@ -42,11 +46,20 @@ namespace FlywayAirlines
             return flightid;
         }
 
-        public void setBookingNumber(int bookingNumber)
+        public void setPassengerid(int passengerid)
+        {
+            this.passengerid = passengerid;
+        }
+        public int getPassengerid()
+        {
+            return passengerid;
+        }
+
+        public void setBookingNumber(string bookingNumber)
         {
             this.bookingNumber = bookingNumber;
         }
-        public int getBookingNumber()
+        public string getBookingNumber()
         {
             return bookingNumber;
         }

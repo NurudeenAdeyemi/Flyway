@@ -6,44 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Flyway Airlines</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+   
+    <link href="~/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
+
+
+    @RenderSection("style", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar  navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Flyway Airlines</a>
+            <div class="container-fluid navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="/images/flyway.png" alt="Logo" style="width:60px;height:30px">
+                </a>
+                <a class="navbar-brand active" asp-area="" asp-controller="Home" asp-action="Index">Flyway Airlines</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white active" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-fw fa-home"></i> Home</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">
+                                Services
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa fa-fw fa-archive"></i>Services</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Link 2</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Link 3</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="About"><i class="fas fa-fw fa-microphone"></i>About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Gallery"><i class="fas fa-fw fa-photo-video"></i>Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-fw fa-file-contract"></i>Contact</a>
+                        </li>
+
+
                         @if (User != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="#">@User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Logout"><i class="fas fa-user"></i> Logout</a>
                             </li>
                         }
                         else
                         {
-                            <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Login"><i class="fas fa-user"></i>Login</a>
                         }
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        <form class="form-inline needs-validation" asp-action="FlightSearch" asp-controller="Home">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" required>
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </form>
                     </ul>
+
+
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -57,6 +93,8 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

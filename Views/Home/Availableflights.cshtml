@@ -1,0 +1,48 @@
+﻿
+@model List<Flight>
+@if (Model != null)
+{
+    <div class="container-fluid text-left bg-light">
+        <div class="row">
+            <div class="col-sm-10 text-left text-primary">
+
+                @foreach (Flight flight in Model)
+                {
+                    <p><h5><i class="fa fa-fw fa-plane"></i>Outbond</h5> @flight.getTakeOfTime().ToLongDateString()</p>
+                    @flight.getTakeOfPoint() <i class="fa fa-fw fa-plane"></i> @flight.getDestination() <p></p>
+                }
+            </div>
+            <div class="col-sm-2">
+                <a class="active btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-fw fa-search"></i> New Search</a>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div>
+        <table class="table  table-bordered table-striped  table-hover">
+
+            <thead class="table-primary text-white">
+                <tr>
+                    <th>Flight Information</th>
+                    <th class="text-center">Cabin Class: Economy</th>
+
+                </tr>
+            </thead>
+            <tbody class="">
+                @foreach (Flight flight in Model)
+                {
+                    <tr>
+
+                        <td class="text-lg-left text-primary"><h5>@flight.getTakeOfPoint() <i class="fa fa-fw fa-plane"></i> @flight.getDestination() <p></p>@flight.getTakeOfTime().ToShortTimeString() <i class="fa fa-fw fa-plane"></i> @flight.getFlightDuration()</h5></td>
+
+                        <td class="text-center text-dark"><h5> &#8358 @flight.getFlightPrice() <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Privacy">Select</a></h5></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+}

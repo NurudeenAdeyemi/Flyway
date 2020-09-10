@@ -1,10 +1,72 @@
 ﻿
 @using FlywayAirlines
 @model User
-<caption>Airline Management System</caption>
-<hr />
 
-<p><a asp-area="" asp-controller="Aircraft" asp-action="Display">Aircraft Management</a></p>
-<p><a asp-area="" asp-controller="Flight" asp-action="Display">Flight Management</a></p>
-<p><a asp-area="" asp-controller="Booking" asp-action="Display">Booking Management</a></p>
-<p><a asp-area="" asp-controller="Passenger" asp-action="Display">Passenger Management</a></p>
+
+<style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {
+        height: 1500px
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+
+    .sidenav {
+        height: auto;
+        padding: 15px;
+        border: solid;
+        border-color: blue;
+        background-color: aqua;
+    }
+
+    .row.content {
+        height: auto;
+    }
+</style>
+<h4 class="text-dark">Airline Management System</h4>
+<hr>
+<!-- A vertical navbar -->
+<nav class="navbar bg-dark col-md-12 ">
+
+    <!-- Links -->
+    <ul class="navbar-nav nav nav-pills nav-stacked">
+        <li class="nav-item active">
+            <a asp-area="" asp-controller="Aircraft" asp-action="Display">Aircraft Management</a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="" asp-controller="Flight" asp-action="Display">Flight Management</a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="" asp-controller="Booking" asp-action="Display">Booking Management</a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="" asp-controller="Passenger" asp-action="Display">Passenger Management</a>
+        </li>
+    </ul><br>
+
+</nav> <br>
+
+       <div>
+           <h4>Leave a Comment:</h4>
+           <form role="form">
+               <div class="form-group">
+                   <textarea class="form-control" rows="3" required></textarea>
+               </div>
+               <button type="submit" class="btn btn-success">Submit</button>
+           </form>
+           <br><br>
+
+           <p><span class="badge"></span> Comments:</p><br>
+       </div>
+
+
+        
+
+       
+           
+        
+   

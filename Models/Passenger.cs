@@ -8,21 +8,18 @@ namespace FlywayAirlines
     public class Passenger
     {
         private int id;
-        private int bookingid;
         private string firstName;
         private string lastName;
-        private string address;
         private double phoneNumber;
         private string email;
         private string gender;
         private DateTime dateOfBirth;
-        public Passenger(int id, string firstName, string lastName, int bookingid, string address, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public List<Booking> Bookings = new List<Booking>();
+        public Passenger(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.bookingid = bookingid;
-            this.address = address;
             this.phoneNumber = phoneNumber;
             this.email = email;
             this.gender = gender;
@@ -36,15 +33,6 @@ namespace FlywayAirlines
         public int getId()
         {
             return id;
-        }
-
-        public void setBookingid(int bookingid)
-        {
-            this.bookingid = bookingid;
-        }
-        public int getBookingid()
-        {
-            return bookingid;
         }
 
         public void setFirstName(string firstName)
@@ -65,14 +53,6 @@ namespace FlywayAirlines
             return lastName;
         }
 
-        public void setAddress(string address)
-        {
-            this.address = address;
-        }
-        public string getAddress()
-        {
-            return address;
-        }
 
         public void setPhoneNumber(double phoneNumber)
         {
@@ -112,7 +92,7 @@ namespace FlywayAirlines
 
         public override string ToString()
         {
-            return $"{id}\t{firstName}\t{lastName}\t{bookingid}\t{phoneNumber}\t{address}\t{email}\t{gender}\t{dateOfBirth}";
+            return $"{id}\t{firstName}\t{lastName}\t{phoneNumber}\t{Bookings}\t{email}\t{gender}\t{dateOfBirth}";
         }
     }
 }

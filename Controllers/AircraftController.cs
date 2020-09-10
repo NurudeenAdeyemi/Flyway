@@ -14,7 +14,7 @@ namespace FlywayAirlines.Controllers
     [Authorize]
     public class AircraftController : Controller
     {
-        static string connStr = "server=localhost;user=root;database=flyway;port=3306;password=password";
+        static string connStr = "server=localhost;user=root;database=airlinemanagement;port=3306;password=loveforall1990";
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IAircraftRepository aircraftRepo = new AircraftRepository(conn);
         static IAircraftService aircraftService = new AircraftService(aircraftRepo);

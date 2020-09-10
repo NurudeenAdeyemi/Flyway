@@ -8,10 +8,12 @@
     <ul class="list-group">
 
         <li class="list-group-item "><b>Booking Number</b> : @Model.getBookingNumber()</li>
-        <li class="list-group-item "><b>Booking Date</b> : @Model.getBookingDate()</li>
+        <li class="list-group-item "><b>Booking Date</b> : @Model.getBookingDate().ToLongDateString()</li>
         <li class="list-group-item "><b>Booking Type</b> : @Model.getBookingType()</li>
         <li class="list-group-item "><b>Seat Number</b> : @Model.getSeatNumber()</li>
-        <li class="list-group-item "><b>Flight ID</b> : @Model.getFlightid()</li>
+        <li class="list-group-item "><b>Flight ID</b> : @Model.flight.getId()</li>
+        <li class="list-group-item "><b>Passenger ID</b> : @Model.passenger.getFirstName()</li>
+        <li class="list-group-item "><b>Passenger ID</b> : @Model.passenger.getLastName()</li>
     </ul>
 
 </div>

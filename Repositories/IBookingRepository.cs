@@ -9,13 +9,13 @@ namespace FlywayAirlines.Repositories
     {
         public List<Booking> getAll();
 
-        public bool create(int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber);
+        public bool create(string bookingNumber, int flightid, int passengerid, DateTime bookingDate, string bookingType, int seatNumber);
 
-        public bool update(int id, int bookingNumber, int flightid, DateTime bookingDate, string bookingType, int seatNumber);
+        public bool update(int id, string bookingNumber, int flightid, int passengerid, DateTime bookingDate, string bookingType, int seatNumber);
 
         public bool remove(int id);
 
-        public Booking find(int bookingNumber);
+        public Booking find(string bookingNumber);
 
         public Booking findById(int id);
 
