@@ -18,5 +18,6 @@ namespace FlywayAirlines.Services
 
         public Aircraft find(string registrationNumber);
         public Aircraft findById(int id);
+        public int getCapacity(int id);
     }
 }

@@ -20,6 +20,8 @@ namespace FlywayAirlines.Repositories
         public Aircraft findById(int id);
 
         public void displayAll();
+
+        public int getCapacity(int id);
     }
 }
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlywayAirlines.Services
 {
@@ -9,9 +7,9 @@ namespace FlywayAirlines.Services
     {
         public List<Passenger> getAll();
 
-        public bool create(string firstName, string lastName,  double phoneNumber, string email, string gender, DateTime dateOfBirth);
+        public int create(string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth);
 
-        public bool update(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth);
+        public bool update(int id, string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth);
 
         public bool remove(int id);
 

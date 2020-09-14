@@ -48,24 +48,30 @@ namespace FlywayAirlines.Controllers
 
      
 
-        [HttpPost]
+        [HttpGet]
 
         public IActionResult FlightSearch(string source, string destination, DateTime departureDate )
         {
+            
             List<Flight> flights = flightService.search(source, destination, departureDate);
             return View("Availableflights", flights);
         }
 
         [HttpPost]
 
-        public IActionResult AddPassenger(string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public IActionResult AddPassenger(string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             passengerService.create(firstName, lastName, phoneNumber, email, gender, dateOfBirth);
             return RedirectToAction("Create", "Booking");
-
         }
-        
 
+        [HttpGet]
+        
+        public IActionResult Country()
+        {
+
+            return View();
+        }
 
     }
 }

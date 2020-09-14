@@ -1,36 +1,23 @@
 ﻿@using FlywayAirlines
 @model Booking
-
+@{ 
+    var flightId = Context.Request.Query["flightId"];
+    var seatNumber = Context.Request.Query["seatNumber"];
+}
 <caption>Add Booking</caption>
 <hr />
 <div class="row">
     <div class="col-md-5">
-
-
         <form method="POST">
-
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="control-label">Booking Type</label>
                     <input class="form-control" name="bookingType" type="text" />
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label class="control-label">Seat Number</label>
-                    <input class="form-control" name="seatNumber" type="number" />
-                </div>
+                </div>   
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Flight Id</label>
-                    <input class="form-control" name="flightid" type="number" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">Passenger Id</label>
-                    <input class="form-control" name="passengerid" type="number" />
-                </div>
-            </div>
+            <input name="seatNumber" value="@seatNumber" type="hidden" />
+            <input name="flightid" value="@flightId" type="hidden" hidden="hidden" />
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

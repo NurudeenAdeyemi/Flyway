@@ -14,13 +14,13 @@ namespace FlywayAirlines.Services
         {
             this.flightRepository = flightRepository;
         }
-        public bool create(int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public bool create(int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
             if (aircraftid <= 0)
             {
                 return false;
             }
-            return flightRepository.create(flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+            return flightRepository.create(flightNumber, aircraftid, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
         }
 
         public Flight find(int flightNumber)
@@ -43,15 +43,18 @@ namespace FlywayAirlines.Services
             return flightRepository.remove(id);
         }
 
-        public bool update(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public bool update(int id, int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
-            return flightRepository.update(id, flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+            return flightRepository.update(id, flightNumber, aircraftid, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
         }
 
         public List<Flight> search(string source, string destination, DateTime departureDate)
         {
+            
             return flightRepository.search(source, destination, departureDate);
         }
+
+
 
     }
 }

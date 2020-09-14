@@ -35,8 +35,8 @@ namespace FlywayAirlines.Repositories
                         int id = reader.GetInt32(0);
                         string firstName = reader.GetString(1);
                         string lastName = reader.GetString(2);
-                        
-                        double phoneNumber = reader.GetDouble(3);
+
+                        string phoneNumber = reader.GetString(3);
                         string email = reader.GetString(4);
                         string gender = reader.GetString(5);
                         DateTime dateOfBirth = reader.GetDateTime(6);
@@ -59,7 +59,7 @@ namespace FlywayAirlines.Repositories
             return passengers;
         }
 
-        public bool create(string firstName,  string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public int create(string firstName,  string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             
             try
@@ -70,8 +70,9 @@ namespace FlywayAirlines.Repositories
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
                 {
+                    var id = command.LastInsertedId;
                     connection.Close();
-                    return true;
+                    return (int)id;
                 }
             }
             catch (MySqlException ex)
@@ -79,10 +80,10 @@ namespace FlywayAirlines.Repositories
                 Console.WriteLine(ex.Message);
             }
             connection.Close();
-            return false;
+            return -1;
         }
 
-        public bool update(int id, string firstName, string lastName,  double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public bool update(int id, string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             
             try
@@ -145,8 +146,8 @@ namespace FlywayAirlines.Repositories
                 {
                     int id = reader.GetInt32(0);
                     string firstName = reader.GetString(1);
-                   
-                    double phoneNumber = reader.GetDouble(3);
+
+                    string phoneNumber = reader.GetString(3);
                     string email = reader.GetString(4);
                     string gender = reader.GetString(5);
                     DateTime dateOfBirth = reader.GetDateTime(6);
@@ -189,8 +190,8 @@ namespace FlywayAirlines.Repositories
                     
                     string firstName = reader.GetString(1);
                     string lastName = reader.GetString(2);
-                   
-                    double phoneNumber = reader.GetDouble(3);
+
+                    string phoneNumber = reader.GetString(3);
                     string email = reader.GetString(4);
                     string gender = reader.GetString(5);
                     DateTime dateOfBirth = reader.GetDateTime(6);

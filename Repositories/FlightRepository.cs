@@ -22,7 +22,7 @@ namespace FlywayAirlines.Repositories
             {
 
                 connection.Open();
-                string sql = "SELECT id, flightNumber, aircraftid,takeOfPoint,flightDuration,takeOfTime,destination,flightPrice from flights";
+                string sql = "SELECT id, flightNumber, aircraftid,takeOfPoint,landingTime,takeOfTime,destination,flightPrice from flights";
 
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -36,11 +36,11 @@ namespace FlywayAirlines.Repositories
                         int flightNumber = reader.GetInt32(1);
                         int aircraftid = reader.GetInt32(2);
                         string takeOfPoint = reader.GetString(3);
-                        Decimal flightDuration = reader.GetDecimal(4);
+                        DateTime landingTime = reader.GetDateTime(4);
                         DateTime takeOfTime = reader.GetDateTime(5);
                         string destination = reader.GetString(6);
                         decimal flightPrice = reader.GetDecimal(7);
-                        Flight flight = new Flight(id, flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+                        Flight flight = new Flight(id, flightNumber, aircraftid, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
                         flights.Add(flight);
 
                     }
@@ -59,7 +59,7 @@ namespace FlywayAirlines.Repositories
             return flights;
         }
 
-        public bool create(int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public bool create(int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
             Aircraft aircraft = aircraftManager.findById(aircraftid);
             if (aircraft == null)
@@ -70,7 +70,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                string sql = "insert into flights (aircraftid,flightNumber, takeOfPoint,flightDuration,takeOfTime,destination,flightPrice) values ('" + aircraftid + "','" + flightNumber + "','" + takeOfPoint + "','" + flightDuration + "','" + takeOfTime.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + destination + "', '" + flightPrice + "')";
+                string sql = "insert into flights (aircraftid,flightNumber, takeOfPoint,landingTime,takeOfTime,destination,flightPrice) values ('" + aircraftid + "','" + flightNumber + "','" + takeOfPoint + "','" + landingTime.ToString("yyyy-MM-dd HH:mm:ss") + "','" + takeOfTime.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + destination + "', '" + flightPrice + "')";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
@@ -87,7 +87,7 @@ namespace FlywayAirlines.Repositories
             return false;
         }
 
-        public bool update(int id, int aircraftid, int flightNumber, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public bool update(int id, int aircraftid, int flightNumber, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
             Aircraft aircraft = aircraftManager.findById(aircraftid);
             if (aircraft == null)
@@ -98,7 +98,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                var sql = "update flights set aircraftid ='" + aircraftid + "',flightNumber = '" + flightNumber + "',takeOfPoint='" + takeOfPoint + "', flightDuration='" + flightDuration + "', takeOfTime='" + takeOfTime.ToString("yyyy-MM-dd HH:mm:ss") + "', destination='" + destination + "', flightPrice='" + flightPrice + "' where id = '" + id + "'";
+                var sql = "update flights set aircraftid ='" + aircraftid + "',flightNumber = '" + flightNumber + "',takeOfPoint='" + takeOfPoint + "', landingTime='" + landingTime.ToString("yyyy-MM-dd HH:mm:ss") + "', takeOfTime='" + takeOfTime.ToString("yyyy-MM-dd HH:mm:ss") + "', destination='" + destination + "', flightPrice='" + flightPrice + "' where id = '" + id + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
@@ -146,7 +146,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                var sql = "select id, aircraftid, flightNumber, takeOfPoint,flightDuration,takeOfTime,destination,flightPrice from flights where flightNumber = '" + flightNumber + "'";
+                var sql = "select id, aircraftid, flightNumber, takeOfPoint,landingTime,takeOfTime,destination,flightPrice from flights where flightNumber = '" + flightNumber + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -156,11 +156,11 @@ namespace FlywayAirlines.Repositories
                     int id = reader.GetInt32(0);
                     int aircraftid = reader.GetInt32(1);
                     string takeOfPoint = reader.GetString(3);
-                    Decimal flightDuration = reader.GetDecimal(4);
+                    DateTime landingTime = reader.GetDateTime(4);
                     DateTime takeOfTime = reader.GetDateTime(5);
                     string destination = reader.GetString(6);
                     decimal flightPrice = reader.GetDecimal(7);
-                    flight = new Flight(id, aircraftid, flightNumber, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+                    flight = new Flight(id, aircraftid, flightNumber, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
                 }
 
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
@@ -179,7 +179,7 @@ namespace FlywayAirlines.Repositories
             List<Flight> flights = getAll();
             foreach (Flight flight in flights)
             {
-                Console.WriteLine($"{flight.getId()}, {flight.getAircraftid()}, {flight.getFlightNumber()}, {flight.getTakeOfPoint()}, {flight.getFlightDuration()}, {flight.getTakeOfTime()}, {flight.getDestination()}, {flight.getFlightPrice()}");
+                Console.WriteLine($"{flight.getId()}, {flight.getAircraftid()}, {flight.getFlightNumber()}, {flight.getTakeOfPoint()}, {flight.getLandingTime()}, {flight.getTakeOfTime()}, {flight.getDestination()}, {flight.getFlightPrice()}");
             }
         }
 
@@ -189,7 +189,7 @@ namespace FlywayAirlines.Repositories
             try
             {
                 connection.Open();
-                var sql = "select id, aircraftid, flightNumber, takeOfPoint,flightDuration,takeOfTime,destination,flightPrice from flights where id = '" + id + "'";
+                var sql = "select id, aircraftid, flightNumber, takeOfPoint,landingTime,takeOfTime,destination,flightPrice from flights where id = '" + id + "'";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 MySqlDataReader reader = command.ExecuteReader();
@@ -200,11 +200,11 @@ namespace FlywayAirlines.Repositories
                     int aircraftid = reader.GetInt32(1);
                     int flightNumber = reader.GetInt32(2);
                     string takeOfPoint = reader.GetString(3);
-                    Decimal flightDuration = reader.GetDecimal(4);
+                    DateTime landingTime = reader.GetDateTime(4);
                     DateTime takeOfTime = reader.GetDateTime(5);
                     string destination = reader.GetString(6);
                     decimal flightPrice = reader.GetDecimal(7);
-                    flight = new Flight(id, aircraftid, flightNumber, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+                    flight = new Flight(id, aircraftid, flightNumber, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
                 }
 
                 Console.WriteLine(reader[0] + " -- " + reader[1]);
@@ -225,7 +225,7 @@ namespace FlywayAirlines.Repositories
             {
 
                 connection.Open();
-                string sql = $"SELECT id, flightNumber, aircraftid,takeOfPoint,flightDuration,takeOfTime,destination,flightPrice FROM flights WHERE takeOfPoint = '{source}' and destination = '{destination}' and date(takeOfTime) = date('{departureDate:yyyy-MM-dd}')";
+                string sql = $"SELECT id, flightNumber, aircraftid,takeOfPoint,landingTime,takeOfTime,destination,flightPrice FROM flights WHERE takeOfPoint = '{source}' and destination = '{destination}' and date(takeOfTime) = date('{departureDate:yyyy-MM-dd}')";
 
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -239,10 +239,10 @@ namespace FlywayAirlines.Repositories
                         int flightNumber = reader.GetInt32(1);
                         int aircraftid = reader.GetInt32(2);
                         string takeOfPoint = reader.GetString(3);
-                        Decimal flightDuration = reader.GetDecimal(4);
+                        DateTime landingTime = reader.GetDateTime(4);
                         DateTime takeOfTime = reader.GetDateTime(5);
                         decimal flightPrice = reader.GetDecimal(7);
-                        Flight flight = new Flight(id, flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+                        Flight flight = new Flight(id, flightNumber, aircraftid, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
                         flights.Add(flight);
 
                     }
@@ -260,5 +260,9 @@ namespace FlywayAirlines.Repositories
             }
             return flights;
         }
+
+       
+
+            
     }
 }

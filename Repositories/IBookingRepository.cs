@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FlywayAirlines.Models;
 
 namespace FlywayAirlines.Repositories
 {
@@ -15,10 +16,12 @@ namespace FlywayAirlines.Repositories
 
         public bool remove(int id);
 
-        public Booking find(string bookingNumber);
+        public BookingSummary find(string bookingNumber);
 
         public Booking findById(int id);
 
         public void displayAll();
+
+        public int bookingCount(int id);
     }
 }

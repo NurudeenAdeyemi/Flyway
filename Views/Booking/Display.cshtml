@@ -35,7 +35,7 @@
             <td> @booking.getSeatNumber() </td>
             <td> @booking.getFlightid() </td>
             <td> @booking.getPassengerid() </td>
-            <td> <a href="/booking/Details/@booking.getId()">Details</a> </td>
+            <td> <a asp-action="Details" asp-route-bookingNumber="@booking.getBookingNumber()">Details</a> </td>
             <td> <a href="/booking/Edit/@booking.getId()">Edit</a> </td>
             <td> <a href="/booking/Delete/@booking.getId()">Delete</a> </td>
         </tr>

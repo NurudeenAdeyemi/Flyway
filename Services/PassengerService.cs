@@ -14,11 +14,11 @@ namespace FlywayAirlines.Services
         {
             this.passengerRepository = passengerRepository;
         }
-        public bool create(string firstName, string lastName,  double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public int create(string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             if (lastName == null)
             {
-                return false;
+                return -1;
             }
             return passengerRepository.create(firstName, lastName, phoneNumber, email, gender, dateOfBirth);
         }
@@ -43,7 +43,7 @@ namespace FlywayAirlines.Services
             return passengerRepository.remove(id);
         }
 
-        public bool update(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public bool update(int id, string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             return passengerRepository.update(id, firstName, lastName, phoneNumber, email, gender, dateOfBirth);
         }

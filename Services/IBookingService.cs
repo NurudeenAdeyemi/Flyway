@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlywayAirlines.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,13 +10,15 @@ namespace FlywayAirlines.Services
     {
         public List<Booking> getAll();
 
-        public bool create(int flightid, int passengerid, string bookingType, int seatNumber);
+        public string create(int flightid, int passengerid, string bookingType, int seatNumber);
 
         public bool update(int id, int flightid, int passengerid, string bookingType, int seatNumber);
 
         public bool remove(int id);
 
-        public Booking find(string bookingNumber);
+        public BookingSummary find(string bookingNumber);
         public Booking findById(int id);
+
+        public int bookingCount(int id);
     }
 }

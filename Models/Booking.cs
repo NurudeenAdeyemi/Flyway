@@ -14,6 +14,7 @@ namespace FlywayAirlines
         private string bookingType;
         private int seatNumber;
         private int passengerid;
+
         public Flight flight { get; set; }
         public Passenger passenger { get; set; }
 

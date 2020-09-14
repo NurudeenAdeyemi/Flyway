@@ -11,20 +11,20 @@ namespace FlywayAirlines
         private int flightNumber;
         private int aircraftid;
         private string takeOfPoint;
-        private decimal flightDuration;
+        private DateTime landingTime;
         private DateTime takeOfTime;
         private string destination;
         private decimal flightPrice;
-        public Aircraft Aircraft { get; set; }
+        public Aircraft Aircraft;
         public List<Booking> Bookings = new List<Booking>();
 
-        public Flight(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration , DateTime takeOfTime, string destination, decimal flightPrice)
+        public Flight(int id, int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
             this.id = id;
             this.flightNumber = flightNumber;
             this.aircraftid = aircraftid;
             this.takeOfPoint = takeOfPoint;
-            this.flightDuration = flightDuration;
+            this.landingTime = landingTime;
             this.takeOfTime = takeOfTime;
             this.destination = destination;
             this.flightPrice = flightPrice;
@@ -68,13 +68,13 @@ namespace FlywayAirlines
         }
 
 
-        public void setFlightDuration(Decimal flightDuration)
+        public void setLandingTime(DateTime landingTime)
         {
-            this.flightDuration = flightDuration;
+            this.landingTime = landingTime;
         }
-        public Decimal getFlightDuration()
+        public DateTime getLandingTime()
         {
-            return flightDuration;
+            return landingTime;
         }
 
         public void setTakeOfTime(DateTime takeOfTime)
@@ -107,7 +107,7 @@ namespace FlywayAirlines
 
         public override string ToString()
         {
-            return $"{id}\t{aircraftid}\t{takeOfPoint}\t{flightDuration}\t{takeOfTime}\t{destination}\t{flightPrice}";
+            return $"{id}\t{aircraftid}\t{takeOfPoint}\t{landingTime}\t{takeOfTime}\t{destination}\t{flightPrice}";
         }
     }
 }

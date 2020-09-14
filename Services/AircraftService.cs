@@ -48,5 +48,11 @@ namespace FlywayAirlines.Services
         {
             return aircraftRepository.update(id, name, type, registrationNumber, capacity, manufacturer, cruiseSpeed);
         }
+
+        public int getCapacity(int id)
+        {
+            return aircraftRepository.getCapacity(id);
+        }
+       
     }
 }

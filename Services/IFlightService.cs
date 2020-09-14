@@ -9,9 +9,9 @@ namespace FlywayAirlines.Services
     {
         public List<Flight> getAll();
 
-        public bool create(int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime,  string destination, decimal flightPrice);
+        public bool create(int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime,  string destination, decimal flightPrice);
 
-        public bool update(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice);
+        public bool update(int id, int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice);
 
         public bool remove(int id);
 

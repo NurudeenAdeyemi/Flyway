@@ -1,16 +1,14 @@
 ﻿
 @model List<Flight>
-@if (Model != null)
+@if (Model != null && Model.Any())
 {
+    var f = Model.First();
+
     <div class="container-fluid text-left bg-light">
         <div class="row">
             <div class="col-sm-10 text-left text-primary">
-
-                @foreach (Flight flight in Model)
-                {
-                    <p><h5><i class="fa fa-fw fa-plane"></i>Outbond</h5> @flight.getTakeOfTime().ToLongDateString()</p>
-                    @flight.getTakeOfPoint() <i class="fa fa-fw fa-plane"></i> @flight.getDestination() <p></p>
-                }
+                <p><h5><i class="fa fa-fw fa-plane"></i>Outbond</h5> @f.getTakeOfTime().ToLongDateString()</p>
+                @f.getTakeOfPoint() <i class="fa fa-fw fa-plane"></i> @f.getDestination() <p></p>
             </div>
             <div class="col-sm-2">
                 <a class="active btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-fw fa-search"></i> New Search</a>
@@ -32,12 +30,13 @@
             <tbody class="">
                 @foreach (Flight flight in Model)
                 {
+                    
+
                     <tr>
 
-                        <td class="text-lg-left text-primary"><h5>@flight.getTakeOfPoint() <i class="fa fa-fw fa-plane"></i> @flight.getDestination() <p></p>@flight.getTakeOfTime().ToShortTimeString() <i class="fa fa-fw fa-plane"></i> @flight.getFlightDuration()</h5></td>
+                        <td class="text-lg-left text-primary"><h5>@flight.getTakeOfPoint() <i class="fa fa-fw fa-plane"></i> @flight.getDestination() <p></p>@flight.getTakeOfTime().ToShortTimeString() <i class="fa fa-fw fa-plane"></i> @flight.getLandingTime().ToShortTimeString()</h5></td>
 
-                        <td class="text-center text-dark"><h5> &#8358 @flight.getFlightPrice() <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Privacy">Select</a></h5></td>
-
+                        <td class="text-center text-dark"><h5> &#8358 @flight.getFlightPrice() <p></p><a class="btn btn-outline-primary" asp-area="" asp-controller="Passenger" asp-action="create" asp-route-flightId="@flight.getId()">Select</a></h5></td>
                     </tr>
                 }
             </tbody>

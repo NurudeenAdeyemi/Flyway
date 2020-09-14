@@ -1,22 +1,43 @@
 ﻿@using FlywayAirlines
-@model Booking
+@model BookingSummary
 
 
 <caption>Booking details</caption>
 <hr />
-<div>
-    <ul class="list-group">
 
-        <li class="list-group-item "><b>Booking Number</b> : @Model.getBookingNumber()</li>
-        <li class="list-group-item "><b>Booking Date</b> : @Model.getBookingDate().ToLongDateString()</li>
-        <li class="list-group-item "><b>Booking Type</b> : @Model.getBookingType()</li>
-        <li class="list-group-item "><b>Seat Number</b> : @Model.getSeatNumber()</li>
-        <li class="list-group-item "><b>Flight ID</b> : @Model.flight.getId()</li>
-        <li class="list-group-item "><b>Passenger ID</b> : @Model.passenger.getFirstName()</li>
-        <li class="list-group-item "><b>Passenger ID</b> : @Model.passenger.getLastName()</li>
-    </ul>
+<div class="container col-sm-12 justify-content-center">
 
+    <div class="card border-dark mb-0 " style="max-width: 28rem; ">
+        <div class="card-header bg-dark border-dark text-white text-center "><strong>Booking details</strong></div>
+        <div class="card-body bg-dark text-dark">
+            <h5 class="card-title">
+                <li class="list-group-item ">Booking Number : @Model.bookingNumber</li>
+            </h5>
+            <p class="card-text">
+                <ul class="list-group">
+
+                    <li class="list-group-item ">Firstname : @Model.firstName</li>
+                    <li class="list-group-item ">Lastname : @Model.lastName</li>
+
+                    <li class="list-group-item ">Booking Type : @Model.bookingType</li>
+                    <li class="list-group-item ">Booking Date : @Model.bookingDate.ToLongDateString()</li>
+                    <li class="list-group-item ">Flight Number : @Model.flightNumber</li>
+                    <li class="list-group-item ">Seat Number : @Model.seatNumber</li>
+                    <li class="list-group-item ">Flight Price :&#8358 @Model.flightPrice</li>
+                    <li class="list-group-item ">Flight Time : @Model.takeOfTime.ToString("dd-MM-yyyy HH:mm:ss")</li>
+                    <li class="list-group-item ">Landing Time : @Model.landingTime.ToString("dd-MM-yyyy HH:mm:ss")</li>
+
+                </ul>
+            </p>
+        </div>
+        <div class="card-footer bg-dark border-dark text-center"><a href="#" class="btn btn-light">Print</a></div>
+    </div>
 </div>
 
-<a asp-area="" asp-controller="Booking" asp-action="Display">Back to Booking List</a>
 
+<a asp-area="" asp-controller="Home" asp-action="Index">Back to Home page</a>
+
+<br>
+<br>
+<br>
+<br>

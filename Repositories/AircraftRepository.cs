@@ -212,5 +212,40 @@ namespace FlywayAirlines.Repositories
                 connection.Close();
                 return aircraft;
             }
+
+            public int getCapacity(int id)
+            {
+                
+                try
+                {
+
+                    connection.Open();
+                    string sql = "SELECT capacity from aircrafts where id = '" + id + "'";
+
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+
+                    if (reader.Read())
+                    {
+                        {
+                            int capacity = reader.GetInt32(0);
+
+                        return capacity;
+
+                        }
+                      
+                    }
+                }
+
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                connection.Close();
+                return 0;
+            }
+
        }
 }
+

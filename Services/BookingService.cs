@@ -1,4 +1,5 @@
-﻿using FlywayAirlines.Repositories;
+﻿using FlywayAirlines.Models;
+using FlywayAirlines.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,20 @@ namespace FlywayAirlines.Services
         {
             this.bookingRepository = bookingRepository;
         }
-        public bool create(int flightid, int passengerid, string bookingType, int seatNumber)
+        public string create(int flightid, int passengerid, string bookingType, int seatNumber)
         {
             if (flightid <= 0)
             {
-                return false;
+                return null;
             }
+
             var bookingNumber = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10);
             var bookingDate = DateTime.Now;
-            return bookingRepository.create(bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
+            bookingRepository.create(bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
+            return bookingNumber;
         }
 
-        public Booking find(string bookingNumber)
+        public BookingSummary find(string bookingNumber)
         {
             return bookingRepository.find(bookingNumber);
         }
@@ -36,7 +39,7 @@ namespace FlywayAirlines.Services
         }
 
         public List<Booking> getAll()
-        { 
+        {
             return bookingRepository.getAll();
         }
 
@@ -45,11 +48,16 @@ namespace FlywayAirlines.Services
             return bookingRepository.remove(id);
         }
 
-        public bool update(int id,  int flightid, int passengerid, string bookingType, int seatNumber)
+        public bool update(int id, int flightid, int passengerid, string bookingType, int seatNumber)
         {
             var bookingNumber = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10);
             var bookingDate = DateTime.Now;
             return bookingRepository.update(id, bookingNumber, flightid, passengerid, bookingDate, bookingType, seatNumber);
+        }
+
+        public int bookingCount(int id)
+        {
+            return bookingRepository.bookingCount(id);
         }
     }
 }

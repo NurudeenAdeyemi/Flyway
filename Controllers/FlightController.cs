@@ -37,9 +37,9 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult create(int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public IActionResult create(int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
-            flightService.create(flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime,  destination, flightPrice);
+            flightService.create(flightNumber, aircraftid, takeOfPoint, landingTime, takeOfTime,  destination, flightPrice);
             return RedirectToAction("Display");
 
         }
@@ -80,9 +80,9 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime,  string destination, decimal flightPrice)
+        public IActionResult Edit(int id, int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime,  string destination, decimal flightPrice)
         {
-            flightService.update(id, flightNumber, aircraftid, takeOfPoint, flightDuration, takeOfTime, destination, flightPrice);
+            flightService.update(id, flightNumber, aircraftid, takeOfPoint, landingTime, takeOfTime, destination, flightPrice);
             return RedirectToAction("Display");
         }
 
@@ -100,7 +100,7 @@ namespace FlywayAirlines.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, int flightNumber, int aircraftid, string takeOfPoint, Decimal flightDuration, DateTime takeOfTime, string destination, decimal flightPrice)
+        public IActionResult Delete(int id, int flightNumber, int aircraftid, string takeOfPoint, DateTime landingTime, DateTime takeOfTime, string destination, decimal flightPrice)
         {
             flightService.remove(id);
             return RedirectToAction("Display");

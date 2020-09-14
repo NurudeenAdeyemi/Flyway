@@ -17,23 +17,66 @@ namespace FlywayAirlines.Controllers
         static MySqlConnection conn = new MySqlConnection(connStr);
         static IBookingRepository bookingRepo = new BookingRepository(conn);
         static IBookingService bookingService = new BookingService(bookingRepo);
+        static IFlightRepository flightRepository = new FlightRepository(conn);
+        static IFlightService flightService = new FlightService(flightRepository);
+        static IAircraftRepository aircraftRepo = new AircraftRepository(conn);
+        static IAircraftService aircraftService = new AircraftService(aircraftRepo);
+        static IPassengerRepository passengerRepo = new PassengerRepository(conn);
+        static IPassengerService passengerService = new PassengerService(passengerRepo);
+
+
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult create()
+        public IActionResult create(int flightId)
         {
+            if (flightId == default)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult create(int flightid, int passengerid, string bookingType, int seatNumber)
+        public IActionResult create(int flightId, string bookingType)
         {
-            bookingService.create(flightid, passengerid, bookingType, seatNumber);
-            return RedirectToAction("Details","Booking");
+            if (string.IsNullOrEmpty(HttpContext.Request.Cookies["passenger_firstName"]))
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
+            var passengerFirstName = HttpContext.Request.Cookies["passenger_firstName"];
+            var passengerLastName = HttpContext.Request.Cookies["passenger_lastName"];
+            var passengerPhoneNumber = HttpContext.Request.Cookies["passenger_phoneNumber"];
+            var passengerGender = HttpContext.Request.Cookies["passenger_gender"];
+            var passengerEmail = HttpContext.Request.Cookies["passenger_email"];
+            var passengerDateOfBirth = DateTime.Parse(HttpContext.Request.Cookies["passenger_dateOfBirth"]);
+            var passengerId = passengerService.create(passengerFirstName, passengerLastName, passengerPhoneNumber, passengerGender, passengerEmail, passengerDateOfBirth);
+
+            Flight flight = flightService.findById(flightId);
+            var capacity = aircraftService.getCapacity(flight.getAircraftid());
+            var bookingCount = bookingService.bookingCount(flightId);
+
+            var occupied = bookingCount;
+            if (occupied >= capacity)
+            {
+                // the flight is full, return response
+            }
+
+            var seatNumber = occupied + 1;
+
+
+            var bookingNumber = bookingService.create(flightId, passengerId, bookingType, seatNumber);
+
+            if (string.IsNullOrEmpty(bookingNumber))
+            {
+                // an error occurred while creating the booking
+            }
+
+            return RedirectToAction("Details","Booking", new { bookingNumber });
         }
         [HttpGet]
-        [AllowAnonymous]
+        
         public IActionResult Display()
         {
             var bookingList = bookingService.getAll();
@@ -42,9 +85,9 @@ namespace FlywayAirlines.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Details(int id)
+        public IActionResult Details(string bookingNumber)
         {
-            var booking = bookingService.findById(id);
+            var booking = bookingService.find(bookingNumber);
             if (booking == null)
             {
                 return NotFound();

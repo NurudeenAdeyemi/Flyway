@@ -10,12 +10,12 @@ namespace FlywayAirlines
         private int id;
         private string firstName;
         private string lastName;
-        private double phoneNumber;
+        private string phoneNumber;
         private string email;
         private string gender;
         private DateTime dateOfBirth;
         public List<Booking> Bookings = new List<Booking>();
-        public Passenger(int id, string firstName, string lastName, double phoneNumber, string email, string gender, DateTime dateOfBirth)
+        public Passenger(int id, string firstName, string lastName, string phoneNumber, string email, string gender, DateTime dateOfBirth)
         {
             this.id = id;
             this.firstName = firstName;
@@ -54,11 +54,11 @@ namespace FlywayAirlines
         }
 
 
-        public void setPhoneNumber(double phoneNumber)
+        public void setPhoneNumber(string phoneNumber)
         {
             this.phoneNumber = phoneNumber;
         }
-        public double getPhoneNumber()
+        public string getPhoneNumber()
         {
             return phoneNumber;
         }
